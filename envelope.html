@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Envelope de Amor</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80') no-repeat center center;
+    background-size: cover;
+  }
+
+  .scene {
+    width: 320px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .envelope {
+    width: 280px;
+    height: 160px;
+    background: rgba(255, 155, 179, 0.9);
+    border-radius: 0 0 8px 8px;
+    position: relative;
+    margin-top: 60px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    border: 1px solid #ff6b8b;
+    border-top: none;
+    backdrop-filter: blur(2px);
+  }
+
+  .flap {
+    width: 280px;
+    height: 140px;
+    background: rgba(255, 107, 139, 0.9);
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    clip-path: polygon(0% 0%, 50% 60%, 100% 0%);
+    transform-origin: top;
+    transform: rotateX(0);
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 2;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    border: 1px solid #ff4775;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    backdrop-filter: blur(2px);
+  }
+
+  .letter {
+    width: 240px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.3s;
+    border: 1px solid #f0f0f0;
+  }
+
+  .message {
+    color: #d6336c;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .open .flap {
+    transform: rotateX(160deg);
+  }
+
+  .open .letter {
+    opacity: 1;
+    z-index: 3;
+  }
+
+  .btn-open {
+    margin-top: 120px;
+    padding: 12px 24px;
+    background: linear-gradient(to bottom, #ff6b8b, #ff4785);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 4;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  }
+
+  .btn-open:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+  }
+
+  .btn-open:active {
+    transform: translateY(1px);
+  }
+
+  .icon {
+    margin: 0 3px;
+    transition: transform 0.3s;
+  }
+
+  .btn-open:hover .icon {
+    transform: scale(1.2);
+  }
+
+  /* Elementos decorativos */
+  .decoration {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .flower {
+    position: absolute;
+    font-size: 24px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    color: #ff6b8b;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  /* Posicionamento dos elementos decorativos */
+  .decoration:nth-child(1) { top: 10%; left: 10%; font-size: 30px; animation-delay: 0s; }
+  .decoration:nth-child(2) { top: 20%; right: 15%; font-size: 40px; animation-delay: 1s; }
+  .decoration:nth-child(3) { bottom: 15%; left: 20%; font-size: 35px; animation-delay: 2s; }
+  .decoration:nth-child(4) { bottom: 25%; right: 10%; font-size: 25px; animation-delay: 3s; }
+  .decoration:nth-child(5) { top: 30%; left: 30%; font-size: 45px; animation-delay: 0.5s; }
+  .decoration:nth-child(6) { top: 60%; right: 25%; font-size: 30px; animation-delay: 1.5s; }
+  .decoration:nth-child(7) { bottom: 10%; right: 30%; font-size: 40px; animation-delay: 2.5s; }
+</style>
+</head>
+<body>
+
+<!-- Elementos decorativos -->
+<div class="decoration flower" style="top: 10%; left: 10%;">🌸</div>
+<div class="decoration flower" style="top: 20%; right: 15%;">🌹</div>
+<div class="decoration heart" style="bottom: 15%; left: 20%;">❤️</div>
+<div class="decoration heart" style="bottom: 25%; right: 10%;">💖</div>
+<div class="decoration flower" style="top: 30%; left: 30%;">🌺</div>
+<div class="decoration heart" style="top: 60%; right: 25%;">💗</div>
+<div class="decoration flower" style="bottom: 10%; right: 30%;">🌼</div>
+
+<div class="scene" id="scene">
+  <div class="envelope">
+    <div class="flap"></div>
+    <div class="letter">
+      <div class="message">
+        <h3>Queridos Erick & Gabrielly</h3>
+        <p>Que esse amor continue crescendo com carinho, leveza e muitos momentos mágicos!</p>
+        <p><em>Com todo o meu coração,</em></p>
+      </div>
+    </div>
+  </div>
+  <button class="btn-open" id="btnOpen">
+    Abrir Envelope <span class="icon">✉️</span>
+  </button>
+</div>
+
+<script>
+  const scene = document.getElementById('scene');
+  const btnOpen = document.getElementById('btnOpen');
+  
+  btnOpen.addEventListener('click', function() {
+    scene.classList.toggle('open');
+    
+    if (scene.classList.contains('open')) {
+      btnOpen.innerHTML = 'Fechar Envelope <span class="icon">✉️</span>';
+    } else {
+      btnOpen.innerHTML = 'Abrir Envelope <span class="icon">✉️</span>';
+    }
+  });
+
+  // Adiciona mais elementos decorativos dinamicamente
+  for (let i = 0; i < 15; i++) {
+    const decor = document.createElement('div');
+    decor.className = Math.random() > 0.5 ? 'decoration flower' : 'decoration heart';
+    decor.innerHTML = Math.random() > 0.5 ? 
+      ['🌸','🌹','🌺','🌻','🌼','🌷'][Math.floor(Math.random()*6)] : 
+      ['❤️','💖','💗','💘','💝','💞'][Math.floor(Math.random()*6)];
+    
+    decor.style.left = Math.random() * 100 + '%';
+    decor.style.top = Math.random() * 100 + '%';
+    decor.style.fontSize = (Math.random() * 20 + 15) + 'px';
+    decor.style.animationDelay = Math.random() * 5 + 's';
+    decor.style.opacity = 0.7 + Math.random() * 0.3;
+    
+    document.body.appendChild(decor);
+  }
+</script>
+
+</body>
+</html>
