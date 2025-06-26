@@ -132,7 +132,7 @@
 
     <div class="login-box">
         <div class="heart-icon">💖</div>
-        <h2>Login Erick&Gabrielly</h2>
+        <h2>Login</h2>
         <input type="text" id="username" placeholder="Nome" />
         <input type="password" id="password" placeholder="Senha" />
         <button onclick="login()">Entrar</button>
@@ -145,7 +145,7 @@
 
             const validPasswords = ["2205", "22do5"];
 
-            if (name === "Erick&Gabrielly" && validPasswords.includes(pass)) {
+            if (name === "" && validPasswords.includes(pass)) {
                 window.location.href = "envelope.html";
             } else {
                 alert("Nome ou senha incorretos! 💔");
